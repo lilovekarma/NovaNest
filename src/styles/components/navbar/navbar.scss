@@ -1,0 +1,92 @@
+@use "../../variable" as *;
+
+/* ----------------------------------------------------------------------------
+  1. 最外層 Navbar：滿版 + 固定 + 毛玻璃
+---------------------------------------------------------------------------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;           /* 滿版寬度 */
+  height: 80px;
+  z-index: 1000;
+
+
+  background-color: $alpha-w70;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  margin: 0;
+  padding: 0;
+}
+
+/* ----------------------------------------------------------------------------
+  2. 內層容器：寬度 1440px、水平置中；同時作為絕對定位參考容器
+---------------------------------------------------------------------------- */
+.navbar__inner {
+  width: 1440px;            
+  height: 100%;
+  margin: 0 auto;           /* 水平置中 */
+  position: relative;       /* 讓子元素的 absolute 參考此處 */
+}
+
+/* ----------------------------------------------------------------------------
+  3. Logo 容器：絕對定位到父容器水平置中、垂直置中
+---------------------------------------------------------------------------- */
+.navbar__logo-container {
+  position: absolute;
+  top: 50%;                     
+  left: 50%;                    
+  transform: translate(-50%, -50%); /* 水平＋垂直真正置中 */
+}
+
+.navbar__logo {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+/* ----------------------------------------------------------------------------
+  4. 按鈕容器：絕對定位到父容器右側 24px、垂直置中
+---------------------------------------------------------------------------- */
+.navbar__button-container {
+  position: absolute;
+  top: 50%;                     
+  right: 24px;                  /* 距離右邊 24px */
+  transform: translateY(-50%);  /* 垂直置中 */
+}
+
+/* ----------------------------------------------------------------------------
+  5. 空心圓 (8×8 px)，文字後方的圓形指示
+---------------------------------------------------------------------------- */
+.navbar__button-circle {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border: 2px solid $color-light; /* 空心白框 (可換其他顏色) */
+  border-radius: 50%;
+  margin-left: 8px;               /* 文字後方留 8px */
+  vertical-align: middle;         /* 與文字垂直置中 */
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* ----------------------------------------------------------------------------
+  6. 按鈕 Hover 時，讓圓圈變色 (示範：使用 $color-accent 填底與邊框)
+---------------------------------------------------------------------------- */
+.navbar__button-container .elevator-btn:hover .navbar__button-circle {
+  background-color: $color-accent;
+  border-color: $color-accent;
+}
+
+/* ----------------------------------------------------------------------------
+  7. 底部分隔線：絕對定位，水平置中，寬度 = 1440 - 2×24 = 1392
+---------------------------------------------------------------------------- */
+.navbar__line {
+  position: absolute;
+  bottom: 0;                                
+  left: 50%;                                
+  transform: translateX(-50%);              /* 水平真正置中 */
+  width: 1392px;                            /* 1440 - (24 × 2) */
+  height: 2px;
+  background-color: $color-light;
+}

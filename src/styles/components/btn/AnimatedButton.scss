@@ -1,0 +1,88 @@
+/* AnimatedButton.scss */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&display=swap");
+
+.elevator-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  padding: 8px 16px;               
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 18px;              
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  background-color: #d49e6e;
+  color: #ffffff;
+  border: none;
+  border-radius: 32px;           
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  outline: none;
+}
+
+.elevator-btn:hover {
+  background-color: #c78f5d;
+}
+
+/* 隱形占位文字：用來撐開按鈕寬度 */
+/* 這段和文字動畫無關，只要維持 invisibility 即可 */
+.static-text {
+  visibility: hidden;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+/* ----------------------------------------------------------------------------
+   可視文字區 (.text-wrapper)
+   1. display: block 讓 height 除非失效
+   2. 高度剛好等於「一行字的實際像素」
+   3. overflow: hidden 把第二行遮掉
+   ---------------------------------------------------------------------------- */
+.text-wrapper {
+  position: absolute;
+  top: 8px;                        
+  left: 4px;                        
+
+  display: block;                  
+  width: calc(100% - 8px);
+  height: 18px;       /* ← 如果測量後發現行高實際是 19px，就改成 19px */
+  overflow: hidden;                 
+}
+
+/* ----------------------------------------------------------------------------
+   文字容器 (.text-inner)
+   1. display: block 讓它能正常「膨脹到兩行文字高度」
+   2. 高度等於 2 × 單行字的行高
+   3. hover 時用 translateY(-50%) 換成第二行
+   ---------------------------------------------------------------------------- */
+.text-inner {
+  display: block;                  
+  position: relative;
+  height: 38px;      
+  transition: transform 0.3s ease;
+}
+
+/* 單行文字 (.text) */
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 18px;      
+}
+
+/* ----------------------------------------------------------------------------
+   Hover 動畫：把 .text-inner 往上移動一半 (translateY(-50%))
+   ---------------------------------------------------------------------------- */
+.elevator-btn:hover .text-inner {
+  transform: translateY(-50%);
+}
