@@ -2,15 +2,18 @@
   "name": "my-novanest",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://ilovekarma.github.io/NovaNest",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "framer-motion": "^12.16.0",
+    "gh-pages": "^6.3.0",
     "gsap": "^3.13.0",
     "ogl": "^1.0.11",
     "react": "^18.2.0",
