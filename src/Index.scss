@@ -1,0 +1,36 @@
+@use './styles/variable/' as *;
+
+.homepage1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; // 或 parent 高度
+}
+
+.sixtwordtitle {
+  font-size: map-get($font-size, xxl);
+  font-weight: $bolder;
+  letter-spacing: $letter-s;
+  color: $color-light;
+  text-align: center;
+  margin: 60px 0 20px;
+}
+
+.sixline {
+  width: 800px;
+  height: 2px;
+  background-color: $color-light;
+  margin: 20px auto 40px auto; // 距離標題與下方 grid 的間距
+}
+
+.homepage3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

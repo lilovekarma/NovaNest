@@ -1,4 +1,5 @@
- @use "../../variable" as *;
+@use "../../variable" as *;
+
 html, body, #root {
   margin: 0;
   padding: 0;
@@ -6,8 +7,8 @@ html, body, #root {
 }
 
 /* ================================================ */
-/* 1. opening-container：滿螢幕 + Flex 水平垂直置中     */
-/*    並設為 position: relative，以便第四階段遮罩能絕對定位 */
+/* 1. opening-container：滿螢幕 + Flex 水平垂直置中   */
+/* 並設為 position: relative，以便第四階段遮罩能絕對定位 */
 /* ================================================ */
 .opening-container {
   position: relative;
@@ -22,7 +23,7 @@ html, body, #root {
 
   /* ------------------------------------------------ */
   /* 第四階段：.show-full                             */
-  /* 1) 遮罩先放大（1s），圓角歸零                     */
+  /* 1) 遮罩先放大（1s），圓角歸零                      */
   /* 2) 放大完成後（延遲 1s），遮罩 opacity 由 1 → 0（0.3s） */
   /* 3) Icon/Text 同步淡出（0.3s），可視需求加延遲        */
   /* ------------------------------------------------ */
@@ -30,13 +31,11 @@ html, body, #root {
     /* Icon 與文字 淡出 */
     .icon-wrapper {
       opacity: 0;
-      transition: opacity 0.3s ease-in; 
-      /* 若要與遮罩淡出同步，可改為 transition: opacity 0.3s ease-in 1s; */
+      transition: opacity 0.3s ease-in;
     }
     .text-wrapper {
       opacity: 0;
-      transition: opacity 0.3s ease-in; 
-      /* 若要與遮罩淡出同步，可改為 transition: opacity 0.3s ease-in 1s; */
+      transition: opacity 0.3s ease-in;
     }
 
     /* 遮罩放大＋淡出 */
@@ -52,17 +51,12 @@ html, body, #root {
 
       z-index: 1;
 
-      /* 
-        - width/height/border-radius 用 1s 完成放大
-        - opacity 用 0.3s 完成淡出，並且延遲 1s 才開始
-      */
       transition:
         width 1s ease-in-out,
         height 1s ease-in-out,
         border-radius 1s ease-in-out,
         opacity 0.3s ease-in-out 1s;
 
-      /* 點擊 show-full 時就把 opacity 設為 0；因為有 delay:1s，會在放大結束後才開始淡出 */
       opacity: 0;
     }
   }
@@ -70,7 +64,7 @@ html, body, #root {
 
 /* ================================================ */
 /* 2. logo-group：水平並排三元素 + 底部對齊 + 間距 8px */
-/*    不需要 position: relative，以免影響第四階段定位 */
+/* 不需要 position: relative，以免影響第四階段定位 */
 /* ================================================ */
 .logo-group {
   display: flex;
@@ -84,11 +78,11 @@ html, body, #root {
 /* ================================================ */
 .icon-wrapper {
   width: 42px;
-  height: 0;       /* 初始高度 0，內容隱藏 */
+  height: 0;      /* 初始高度 0，內容隱藏 */
   overflow: hidden;
   opacity: 1;
   transition:
-    height 0.2s ease-in,   /* 0.2s 由 0 → 40px */
+    height 0.2s ease-in,  /* 0.2s 由 0 → 40px */
     opacity 0.3s ease-in;  /* 第四階段再 0.3s 後 opacity→0 */
 
   &.show-icon {
@@ -101,11 +95,11 @@ html, body, #root {
 /* ================================================ */
 .text-wrapper {
   width: 163px;
-  height: 0;       /* 初始高度 0，文字隱藏 */
+  height: 0;      /* 初始高度 0，文字隱藏 */
   overflow: hidden;
   opacity: 1;
   transition:
-    height 0.2s ease-in,   /* 0.2s 由 0 → 27px */
+    height 0.2s ease-in,  /* 0.2s 由 0 → 27px */
     opacity 0.3s ease-in;  /* 第四階段再 0.3s 後 opacity→0 */
 
   &.show-text {
@@ -114,16 +108,16 @@ html, body, #root {
 }
 
 /* ================================================================ */
-/* 5. 裁切框 Mask：.photo-mask-wrapper                         */
-/*    - 初始 position: relative，參與 Flex 排列                    */
-/*    - show-mask 時 width → 80，0.6s 動畫                           */
-/*    - show-full 時 override 成 absolute，放大（1s）＋延遲淡出（0.3s） */
+/* 5. 裁切框 Mask：.photo-mask-wrapper                             */
+/* - 初始 position: relative，參與 Flex 排列                     */
+/* - show-mask 時 width → 80，0.6s 動畫                          */
+/* - show-full 時 override 成 absolute，放大（1s）＋延遲淡出（0.3s） */
 /* ================================================================ */
 .photo-mask-wrapper {
-  position: relative; /* 初始參與 Flex，.photo-img 才能以此為定位參考 */
-  width: 0;            /* 初始寬度 0 */
-  height: 40px;        /* 固定高度 40px */
-  border-radius: 32px; /* 圓角 32px */
+  position: relative; /* 初始參與 Flex，內部的組件才能以此為定位參考 */
+  width: 0;           /* 初始寬度 0 */
+  height: 40px;       /* 固定高度 40px */
+  border-radius: 32px;/* 圓角 32px */
   overflow: hidden;
   opacity: 1;
 
@@ -133,17 +127,24 @@ html, body, #root {
     width: 80px; /* 加上 .show-mask 後，就從 0 → 80px */
   }
 
-  /* ------------------------------------------------ */
-  /* 裁切框內的大圖：中心對齊裁切框                     */
-  /* ------------------------------------------------ */
-  .photo-img {
+  /*
+   * =========================================================
+   * 【主要修改點】
+   * 1. 移除舊的 .photo-img 選擇器
+   * 2. 新增針對 DispersionBackground 組件根元素 .dispersion-mask-wrapper 的樣式
+   * 讓它的行為和舊的圖片一樣：絕對定位、置中、擁有最終的完整尺寸。
+   * =========================================================
+   */
+  .dispersion-mask-wrapper {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 1392px; /* 原始大圖寬度 */
-    height: 700px; /* 原始大圖高度 */
-    object-fit: cover;
+    width: 1290px; /* 讓組件維持完整尺寸 */
+    height: 600px; /* 讓組件維持完整尺寸 */
+    
+    // 注意：DispersionBackground 組件本身已有自己的樣式，
+    // 這裡的規則會與之疊加，主要用於在 OpeningAnimation 中控制其「定位」和「尺寸」。
   }
 }
 

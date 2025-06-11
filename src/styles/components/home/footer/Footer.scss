@@ -1,0 +1,101 @@
+$footer-bg-color: #1B1F3B;
+$text-color: #F9FAFF;
+$border-color: #F9FAFF;
+
+// --- 主要容器 ---
+.footer-container {
+  background-color: $footer-bg-color;
+  color: $text-color;
+  padding: 0 60px 30px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// --- 頂部分隔線樣式 ---
+.footer__line {
+  width: 1392px;
+  height: 2px;
+  background-color: $border-color;
+  margin: 0 auto 30px;
+}
+
+// --- 內容排版 ---
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1392px;
+  margin: 0 auto;
+}
+
+// --- 左側 Logo ---
+.footer-logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  .logo-icon {
+    margin-right: 12px;
+    font-size: 32px;
+  }
+
+  .logo-text {
+    color: $text-color;
+  }
+}
+
+// --- 中間聯絡資訊 (已更新) ---
+.footer-info {
+  padding-left: 240px;
+  flex-grow: 1;
+  width: 500px;
+  margin: 0 40px;
+
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    gap: 64px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-label {
+      width: 80px;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .info-value {
+      line-height: 1.5;
+      white-space: normal;
+    }
+  }
+}
+
+// --- 右側導覽列 ---
+.footer-nav {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+
+  li {
+    margin-left: 30px;
+  }
+
+  a {
+    color: $text-color;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #DAA36F;
+    }
+  }
+}

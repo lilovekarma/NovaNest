@@ -1,0 +1,12 @@
+@use "../../../variable/" as *;
+// src/components/BorderBox/BorderBox.scss
+$border-lit-color: #7FFFD4; // 亮綠色
+
+.border-box-highlight {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 4px solid $border-lit-color; // ⭐ 邊框始終是亮綠色
+  background-color: transparent; // 背景透明
+  border-radius: $radius-s ; // 與 HoverInfoBox 的視覺風格匹配
+}

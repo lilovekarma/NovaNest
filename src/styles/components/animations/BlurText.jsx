@@ -1,3 +1,4 @@
+// src/animations/BlurText.jsx
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState, useMemo } from 'react';
 
@@ -96,10 +97,10 @@ const BlurText = ({
   );
 
   return (
-    <p
+    <span
       ref={ref}
       className={className}
-      style={{ display: 'flex', flexWrap: 'wrap' }}
+      style={{ display: 'inline-flex', flexWrap: 'wrap' }}
     >
       {elements.map((segment, index) => {
         // 根據 fromSnapshot + toSnapshots 生成 keyframes
@@ -110,8 +111,8 @@ const BlurText = ({
           duration: totalDuration,
           times,
           delay: (index * delay) / 1000,
+          ease: easing,
         };
-        spanTransition.ease = easing;
 
         return (
           <motion.span
@@ -130,7 +131,7 @@ const BlurText = ({
           </motion.span>
         );
       })}
-    </p>
+    </span>
   );
 };
 

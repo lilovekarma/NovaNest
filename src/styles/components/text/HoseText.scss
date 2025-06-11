@@ -1,0 +1,136 @@
+@use '../../variable/' as *;
+
+.hose-text {
+  display: flex;
+  width: 1392px;
+  height: 700px;
+  overflow: hidden;
+  background: $color-mainblack;
+  border-radius: $space-l
+}
+
+.hose-text__left {
+  width: 600px;
+  height: 700px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* SVG 遮罩 */
+}
+
+.hose-text__right {
+  position: relative;
+  width: 792px;
+  height: 700px;
+  background: $color-grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.hose-text__content {
+  text-align: center;
+  max-width: 400px;
+}
+
+.hose-text__title {
+  color: $color-mainblack;
+  font-size: map-get($font-size, xl);
+  font-weight: $bolder;
+  line-height: $line-h-l;
+  letter-spacing: $letter-xs;
+  margin-bottom: 24px;
+}
+
+.hose-text__options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  row-gap: 16px;
+}
+
+.hose-text__options li button {
+  width: 100%;
+  padding: $radius-s;
+  background: $color-deep;
+  border: none;
+  border-radius: 24px;
+  color: $color-light;
+  font-size: map-get($font-size, s);
+  font-weight: $bolder;
+  line-height: $line-h-l;
+  letter-spacing: $letter-xs;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.hose-text__options li button:hover {
+  background: #7feac1;
+  color: $color-mainblack;
+}
+
+.hose-text__options li button.hose-text__btn--selected {
+  background: $color-accent;
+  color: $color-mainblack;
+}
+
+/* ✅ 修改：導覽按鈕的完整樣式 */
+
+/* 導覽按鈕容器，用來定位 */
+.hose-text__nav-buttons {
+  position: absolute;
+  right: 120px;
+  bottom: 50px;
+  display: flex;
+  gap: 1rem;
+  /* 兩個按鈕之間的間距 */
+}
+
+/* 返回按鈕的樣式 */
+.hose-text__back {
+  padding: 10px 16px;
+  margin-right: 360px;
+  background: $color-light;
+  color: $color-mainblack;
+  font-size: map-get($font-size, s);
+  font-weight: $bolder;
+  line-height: $line-h-l;
+  letter-spacing: $letter-xs;
+  border-radius: $radius-m;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: $bolder;
+  transition: background 0.2s;
+
+  &:hover {
+    background:$color-accent;
+  }
+}
+
+/* 下一題按鈕的樣式 (已移除定位) */
+.hose-text__next {
+  padding: 10px 16px;
+  background: $color-light;
+  color: $color-mainblack;
+  font-size: map-get($font-size, s);
+  font-weight: $bolder;
+  line-height: $line-h-l;
+  letter-spacing: $letter-xs;
+  border-radius: $radius-m;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.hose-text__next:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.hose-text__next:hover:enabled {
+  background:$color-accent;
+}

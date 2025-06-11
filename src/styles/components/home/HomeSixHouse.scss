@@ -1,0 +1,77 @@
+@use "../../variable/" as *;
+
+.section-HomeSixHouse {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 72px; // 正方形與文字間距
+  padding: 0 80px;
+  width: 1392px;
+  height: 800px;
+
+  .square {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    background: transparent; // 本身透明
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      /* 六層彩色 radial-gradient */
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(251, 31, 31, 0.8), transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(100, 200, 255, 0.8), transparent 50%),
+        radial-gradient(circle at 30% 80%, rgba(255, 255, 100, 0.8), transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(100, 255, 150, 0.8), transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(187, 84, 255, 0.8), transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(30, 0, 163, 0.8), transparent 50%);
+      background-blend-mode: screen;
+      filter: blur(120px); // 更強模糊
+      animation: move-glow 4s ease-in-out infinite alternate;
+    }
+  }
+
+  @keyframes move-glow {
+    0% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    50% {
+      transform: translate(120px, -120px) scale(1.4) rotate(45deg);
+    }
+
+    100% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+  }
+
+  .content {
+    max-width: 600px;
+
+
+    h2 {
+      color: $color-copper;
+      font-size: map-get($font-size, xxl);
+      line-height: $line-h-l;
+      letter-spacing: $letter-s;
+      font-weight: $bolder;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: $color-light;
+      font-size: map-get($font-size, m);
+      line-height: $line-h-l;
+      letter-spacing: $letter-s;
+      margin-bottom: 1.5rem;
+    }
+
+   
+  }
+}

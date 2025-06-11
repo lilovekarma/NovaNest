@@ -1,0 +1,170 @@
+@use "../../variable/" as *;
+
+.dispersion-section {
+  position: relative;
+  width: 1440px;
+  height: 800px;
+  overflow: hidden;
+
+}
+
+/* ───────────────────────────────────────────────────────
+   紫色山形：置中、靠底
+──────────────────────────────────────────────────────── */
+.bottom-image {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 1440px;
+  height: auto;
+  object-fit: contain;
+  z-index: 8;
+}
+
+/* ───────────────────────────────────────────────────────
+   遮罩 (mask + Blob)：固定寬度 1392，不裁剪整張 SVG
+──────────────────────────────────────────────────────── */
+.dispersion-mask-wrapper {
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 1290px;
+  height: 600px;
+
+  mask-image: url("../../../images/home/background-mark.svg");
+  -webkit-mask-image: url("../../../images/home/background-mark.svg");
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center bottom;
+  -webkit-mask-position: center bottom;
+  mask-size: 1290px auto;
+  -webkit-mask-size: 1290px auto;
+}
+
+// /* 遮罩內部的深色底層與 Blob 動畫層 (不動) */
+// .dispersion-content {
+//   position: absolute;
+//   bottom: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+// }
+// .background-layer {
+//   position: absolute;
+//   bottom: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background-color: #0a0c16;
+//   z-index: 1;
+// }
+// .blob-layer {
+//   position: absolute;
+//   bottom: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   z-index: 2;
+// }
+// .blob {
+//   position: absolute;
+//   border-radius: 50%;
+//   filter: blur(150px);
+//   opacity: 0.9;
+//   mix-blend-mode: lighten;
+// }
+// .blob-a {
+//   width: 800px;
+//   height: 800px;
+//   background: radial-gradient(
+//     circle at center,
+//     #1a4699 80%,
+//     #f9faff 30%,
+//     rgba(26, 70, 153, 0.6) 60%,
+//     transparent 100%
+//   );
+//   bottom: 0;
+//   right: 10%;
+//   transform: translateY(50%);
+//   animation: moveA 2s ease-in-out infinite alternate;
+// }
+// .blob-b {
+//   width: 600px;
+//   height: 600px;
+//   background: radial-gradient(
+//     circle at center,
+//     #ffd119 50%,
+//     #f9faff 0%,
+//     #2471ff 100%
+//   );
+//   bottom: 0;
+//   left: 20%;
+//   transform: translateY(50%);
+//   animation: moveB 2s ease-in-out infinite alternate;
+// }
+// @keyframes moveA {
+//   0% {
+//     transform: translateY(50%) translateX(0);
+//   }
+//   100% {
+//     transform: translateY(50%) translateX(200px);
+//   }
+// }
+// @keyframes moveB {
+//   0% {
+//     transform: translateY(50%) translateX(0);
+//   }
+//   100% {
+//     transform: translateY(50%) translateX(-200px);
+//   }
+// }
+
+/* ───────────────────────────────────────────────────────
+   房子：置中靠底，置於遮罩之上
+──────────────────────────────────────────────────────── */
+.center-content {
+  position: absolute;
+  bottom: 20px;
+  /* 房子底部與 Section 底相距 20px，可自行微調 */
+  left: 60%;
+  transform: translateX(-50%);
+  z-index: 10;
+  /* 最上層 */
+}
+
+.house-image {
+  width: 500px;
+  /* 可自行調整尺寸 */
+  height: auto;
+  object-fit: contain;
+}
+
+/* ───────────────────────────────────────────────────────
+   文字：獨立絕對定位，貼近左側
+──────────────────────────────────────────────────────── */
+.left-text {
+  position: absolute;
+  top: 30%;
+  /* 從頂部往下 30%，可自行微調 */
+  left: 40px;
+  /* 距離最左邊 40px，可再改成別的 px 或 % */
+  z-index: 10;
+  /* 與房子同樣層級，但因在 HTML 結構後面，自動會蓋在房子上方 */
+}
+
+.left-text .title {
+  color: $color-light;
+  margin-bottom: 12px;
+  letter-spacing: $letter-s;
+}
+
+.left-text .subtitle {
+  color: $color-light;
+  font-size: map-get($font-size, xxl);
+  letter-spacing: $letter-s;
+
+}

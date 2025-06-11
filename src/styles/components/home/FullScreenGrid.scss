@@ -1,0 +1,68 @@
+@use "../../variable/" as *;
+
+.full-screen-grid-container {
+  width: 1392px;
+  height: 1200px;
+  background-color: $color-mainblack; 
+  padding: 20px; // 與 .grid-layout 的 top/left/right/bottom 配合
+  box-sizing: border-box;
+  margin: 20px auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.mouse-spotlight-visual-glow {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(46, 88, 46, 0.08) 0%, rgba(57, 86, 215, 0) 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1; // 光暈在最底層（但在主背景之上）
+}
+
+// .grid-layout 的通用樣式，用於文字層和邊框層的對齊
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 15px;
+  position: absolute;
+  // ⭐ 確保網格與容器的 padding 對齊 (如果容器有 padding)
+  // 如果 full-screen-grid-container 的 padding 是 20px:
+  top: 20px;
+  left: 20px;
+  right: 20px; // 或 width: calc(100% - 40px);
+  bottom: 20px; // 或 height: calc(100% - 40px);
+  // 如果 full-screen-grid-container 沒有 padding，則 top:0; left:0; width:100%; height:100%;
+}
+
+.text-grid {
+  z-index: 3; // ⭐ 文字層在最上方，始終可見
+  pointer-events: none; // ⭐ 讓文字層不攔截滑鼠事件，事件由最底層容器捕獲
+     // 個別文字框內的 pointer-events 已在 HoverInfoBox.scss 中設定
+}
+
+.border-grid {
+  z-index: 2; // ⭐ 邊框層在文字層之下，光暈視覺效果之上
+
+  // CSS 遮罩核心樣式 (與上次相同)
+  --mask-x: -1000px;
+  --mask-y: -1000px;
+  --mask-radius: 0px;
+
+  mask-image: radial-gradient(
+    circle var(--mask-radius) at var(--mask-x) var(--mask-y),
+    rgba(255, 255, 255, 1) 0%,    // ⭐ 中心點完全不透明 (顯示內容)
+    rgba(255, 255, 255, 1) 40%,   // ⭐ 到達半徑的40%處仍然完全不透明
+    rgba(255, 255, 255, 0) 100%  // ⭐ 從40%到100%之間逐漸變為完全透明 (隱藏內容)
+  );
+  mask-repeat: no-repeat;
+  -webkit-mask-image: radial-gradient( /* ... (同上) ... */ );
+  -webkit-mask-repeat: no-repeat;
+
+  .empty-grid-cell { // 用於填充非目標框的網格單元，確保佈局一致
+     background: transparent; // 或者移除此class，直接返回null，讓grid自行處理空單元
+  }
+}

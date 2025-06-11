@@ -1,0 +1,100 @@
+@use "../../variable/" as *;
+
+.app-first2 {
+    display: flex;
+    width: 1392px;
+    height: 1000px;
+    background: $alpha-w70;
+    border-radius: 64px;
+
+    .text-list {
+        flex: 1; // 左側占滿一半空間
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 120px;
+
+        .text-item {
+            margin-bottom: 48px;
+            cursor: pointer;
+            transition: transform 0.4s ease, opacity 0.4s ease, color 0.4s ease;
+
+            h3 {
+                margin: 0 0 8px;
+                font-size: map-get($font-size, xl);
+                line-height: $line-h-m;
+                font-weight: $bold;
+                letter-spacing: $letter-s;
+                color: $color-copper ;
+            }
+
+            p {
+                margin: 0;
+                font-size: map-get($font-size, s);
+                line-height: $line-h-m;
+                font-weight: $normal;
+                letter-spacing: $letter-s;
+                color: $color-light ;
+            }
+
+            &.active {
+                transform: scale(1.08);
+                opacity: 1;
+                color: $color-deep;
+            }
+
+            &.inactive {
+                transform: scale(0.9);
+                opacity: 0.4;
+                color: $color-deep;
+            }
+        }
+    }
+
+    .phone-wrapper {
+        position: relative;
+        width: 50%; // 右側空間
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .phone-bg {
+            position: absolute;
+            top: 47%;
+            left: 50%;
+            width: 358px; // 根據需求調整
+            height: 617px; // 根據需求調整
+            transform: translate(-50%, -50%);
+            background-size: contain; // 不裁切
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: background-image 0.6s ease;
+            z-index: 0;
+
+            &.bg-0 {
+                background-image: url('/images/bg0.jpg');
+            }
+
+            &.bg-1 {
+                background-image: url('/images/bg1.jpg');
+            }
+
+            &.bg-2 {
+                background-image: url('/images/bg2.jpg');
+            }
+        }
+
+        .phone {
+            position: relative;
+            z-index: 1;
+            width: 320px; // 手機框寬度
+            height: 700px; // 手機框高度
+
+            img {
+                width: 100%;
+                height: auto; // 保持寬度，高度自適應
+                object-fit: contain;
+            }
+        }
+    }
+}

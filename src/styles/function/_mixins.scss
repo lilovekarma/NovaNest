@@ -1,0 +1,99 @@
+@use 'sass:math';
+
+@import "../variable/";
+
+@mixin elevator-button($bg-color: $color-light,
+  $bg-hover-color: $color-light,
+  $text-color: $color-light,
+  $font-size: 18px,
+  $padding-vertical: $space-xs,
+  $padding-horizontal: $space-s,
+  $border-radius: $radius-ex,
+  $line-height: $font-size*1.2) {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: $padding-vertical $padding-horizontal;
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: $normal;
+  font-size: $font-size;
+  line-height: $line-height;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: $bg-color;
+  color: $text-color;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  outline: none;
+
+  &:hover {
+    background-color: $bg-hover-color;
+  }
+
+  .static-text {
+    visibility: hidden;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  .text-wrapper {
+    position: absolute;
+    top: $padding-vertical;
+    left: math.div($padding-horizontal, 2);
+    display: block;
+    width: calc(100% - #{$padding-horizontal});
+    height: $line-height;
+    overflow: hidden;
+  }
+
+  .text-inner {
+    display: block;
+    position: relative;
+    height: ($line-height * 2);
+    transition: transform 0.3s ease;
+
+    .text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: $line-height;
+    }
+  }
+
+  &:hover .text-inner {
+    transform: translateY(-50%);
+  }
+}
+
+/* .btn-custom {
+  @include elevator-button(
+    #333333,    // 背景色：深灰
+    #555555,    // hover 背景：更深灰
+    #f0f0f0,    // 文字色：淺灰
+    20px,       // 字體大小：20px
+    12px,       // 上下內距：12px
+    24px,       // 左右內距：24px
+    40px        // 圓角：40px
+  );
+} */
+// 2. 定義各變體：只要 include mixin 並傳入不同參數
+.btn-navbar {
+  @include elevator-button($color-copper, $color-copperdark);
+}
+
+.btn-homeapp {
+  @include elevator-button($color-mainblack, $color-deep, $font-size: 24px);
+}
+
+.btn-homebtn {
+  @include elevator-button($color-copper, $color-copperdark, $font-size: 1.8rem, $padding-horizontal: $space-s, $border-radius: $radius-s, );
+}

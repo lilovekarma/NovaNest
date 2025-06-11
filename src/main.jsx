@@ -1,10 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import Index from './Index'
+// import SixHouse from './SixHouse'
+import '../src/styles/styles.scss'
+import AppExhibit from './AppExhibit'
+// import HouseTypeTest from './HouseTypeTest'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    {/* <SixHouse/> */}
+    {/* <HouseTypeTest/> */}
+    {/* <AppExhibit/> */}
+    <Index />
   </React.StrictMode>,
 )

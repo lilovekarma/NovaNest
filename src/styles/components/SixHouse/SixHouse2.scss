@@ -1,0 +1,115 @@
+// src/components/SixHouse1.scss
+@use "../../variable/" as *;
+
+.series2-section {
+  width: 1392px;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-mainblack;
+ 
+}
+
+.series2-panel {
+  width: 1300px;
+  height: 600px;
+
+  display: flex;
+  align-items: center;
+  background-color: $color-mainblack;
+}
+
+.series2-panel__image {
+  width: 720px;
+  height: 600px;
+  background-size: cover;
+  background-position: center;
+}
+
+.series2-panel__divider {
+  width: 2px;
+  height: 600px;
+  background-color: $color-light;
+  margin: 0 48px;
+}
+
+.series2-panel__content {
+  flex: 1;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 0;
+  gap: 16px;
+  box-sizing: border-box;
+  color: $color-light
+}
+
+.series2-panel__title {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  /* 兩個 item 之間 16px */
+  margin: 0;
+  padding: 0;
+}
+
+.series2-panel__title-text {
+  font-size: map-get($font-size, xxxl);
+  line-height: $line-h-m;
+  font-weight: $bold;
+  letter-spacing: $letter-s;
+  color: $color-copper ;
+}
+
+.series2-panel__spacer {
+  flex: 1;
+  /* 撐開中間 */
+}
+
+.series2-panel__num {
+  font-size: map-get($font-size, xxl);
+  line-height: $line-h-m;
+  font-weight: $bold;
+  letter-spacing: $letter-s;
+  opacity: 0.6;
+}
+
+.series2-panel__subtitle {
+  font-size: map-get($font-size, m);
+  margin: 0;
+  color: $color-copper;
+  font-weight: $bold;
+  letter-spacing: $letter-s;
+}
+
+.series2-panel__features {
+  flex: 1;
+  /* 自動 Fill 中間 */
+  font-size: map-get($font-size, m);
+  font-weight: $normal;
+  letter-spacing: 1px;
+  margin: 0;
+  white-space: normal; // ✅ 可換行
+  word-wrap: break-word; // ✅ 長單字也會換行
+  overflow-wrap: break-word; // ✅ 現代瀏覽器的換行方式
+}
+
+.series2-panel__tag-pill {
+  display: inline-flex;
+  /* 改成 inline-flex，才不會被撐滿 */
+  align-items: center;
+  /* 讓內部垂直置中 */
+  padding: $space-xy-s;
+  border: 1px solid $color-light;
+  border-radius: $radius-ex;
+  font-size: map-get($font-size, s);
+  align-self: flex-start;
+  white-space: nowrap;
+
+
+  >p {
+    margin: 0;
+    display: inline-flex;
+  }
+}

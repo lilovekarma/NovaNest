@@ -1,0 +1,78 @@
+@use '../../variable/' as *;
+
+.quiz-results {
+    display: flex;
+    width: 1392px;
+    height: 800px;
+    background-color: $color-mainblack;
+    color: $color-light;
+
+    .content {
+        width: calc(100% - 600px);
+        display: flex;
+        flex-direction: column;
+        align-items: center; // ✅ 水平置中內容
+        justify-content: center; // ✅ 垂直置中
+        text-align: center; // ✅ 文字置中
+        padding: 0 48px;
+
+        h2 {
+            background-color: $color-accent;
+            color: $color-mainblack ;
+            font-size: map-get($font-size, xxl);
+            font-weight: $bolder;
+            line-height: $line-h-l;
+            letter-spacing: $letter-s;
+            padding: $space-xs;
+        }
+
+        h3 {
+            font-size: map-get($font-size, xl);
+            font-weight: $bolder;
+            line-height: $line-h-l;
+            letter-spacing: $letter-xs;
+            color: $color-copper;
+            margin: $space-yx-m;
+        }
+
+        .desc-title {
+            font-size: map-get($font-size, l);
+            font-weight: $bolder;
+            line-height: $line-h-l;
+            letter-spacing: $letter-xs;
+            margin-bottom: $radius-m;
+        }
+
+        .feature-list {
+            font-size: map-get($font-size, s);
+            font-weight: $bolder;
+            line-height: $line-h-l;
+            letter-spacing: $letter-xs;
+            margin-bottom: 40px;
+            list-style: disc;
+            padding-left: 1.5em; // ✅ 保留自然縮排
+            text-align: left; // ✅ 重點：讓圓點跟文字對齊
+
+            li {
+                margin-bottom: 6px;
+            }
+        }
+
+      
+    }
+
+    .image {
+        width: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 48px;
+
+        img {
+            width: 600px;
+            height: 600px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+    }
+}

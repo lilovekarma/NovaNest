@@ -1,0 +1,40 @@
+// font-family
+$font-en: "Urbanist", sans-serif;
+$font-tc: "Noto Sans TC", sans-serif;
+
+
+// font-size
+$font-size: (
+    // map-get($font-size, * ) 
+    s: 1rem,
+    m: 1.125rem,
+    l: 1.5rem,
+    xl: 1.8rem,
+    xxl: 2rem,
+    xxxl: 3rem,
+
+
+);
+
+// 行高
+$line-h-s: 1;
+$line-h-m: 1.2;
+$line-h-l: 1.5;
+
+//字重
+$normal: 400;
+$bold: 600;
+$bolder: 700;
+$lighter: 100;
+
+//字距
+$letter-xs: 2px;
+$letter-s: 2.4px;
+
+
+/* 範例 */
+// font-size: map-get($font-size, xxxl);
+//   line-height: $line-h-m;
+//   font-weight: $bold;
+//   letter-spacing: $letter-s;
+//   color: $color-copper ;

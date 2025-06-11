@@ -1,0 +1,116 @@
+@use "../../variable/" as * ;
+.section-wrapper {
+    background-color: $color-mainblack;
+    position: relative;
+    width: 1392px;
+    height: 700px;
+}
+
+.phone-left,
+.phone-right {
+    position: absolute;
+    top: 50%; // 垂直中心
+    transform: translateY(-50%); // 垂直拉回一半高度
+    transition: none; // 取消過渡
+}
+
+.phone-left {
+    left: 40%;
+    transform: translate(-50%, -30%); // 水平＋垂直都置中
+    width: 245px;
+}
+
+.phone-right {
+    left: 60%;
+    transform: translate(-50%, -60%);
+    width: 275px;
+}
+
+.gradient-circle {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 500px; height: 500px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  overflow: visible;
+  z-index: 0;
+  
+  /* 為了疊兩層，我們不用 background，而用偽元素 */
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    filter: blur(73.4px);
+  }
+
+  /* 第一層：黃→橘黃→藍 */
+  &::before {
+    background: radial-gradient(
+      $color-copperyellow 0%,
+      #8899FF 50%,
+      $color-blue 100%
+    );
+    animation: fadeOut 5s linear infinite alternate;
+  }
+
+  /* 第二層：藍→淡藍→黃 */
+  &::after {
+    background: radial-gradient(
+      circle at center,
+      $color-blue 0%,
+      #8899FF 50%,
+      $color-copperyellow 100%
+    );
+    animation: fadeIn 5s linear infinite alternate;
+  }
+}
+
+/* 第一層：從不透明 → 透明 */
+@keyframes fadeOut {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* 第二層：從透明 → 不透明 */
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* 1. 手機 */
+@keyframes leftBounce {
+
+    0%,
+    100% {
+        transform: translate(-50%, -30%) translateY(0);
+    }
+
+    50% {
+        transform: translate(-50%, -30%) translateY(-100px);
+    }
+}
+
+@keyframes rightBounce {
+
+    0%,
+    100% {
+        transform: translate(-50%, -60%) translateY(0);
+    }
+
+    50% {
+        transform: translate(-50%, -60%) translateY(120px);
+    }
+}
+
+/* 2. 把動畫套上去 */
+.phone-left {
+    /* 原本的 left、width … 都保留 */
+    animation: leftBounce 5s ease-in-out infinite;
+}
+
+.phone-right {
+    /* 原本的 left、width … 都保留 */
+    animation: rightBounce 5s ease-in-out infinite;
+}

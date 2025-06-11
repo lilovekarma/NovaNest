@@ -1,0 +1,138 @@
+@use "../../variable/" as *;
+
+@keyframes fadeOutIn {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInOut {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+
+// --- 元件主體 ---
+.six-houses-cover {
+  width: 1392px;
+  height: 800px;
+  background-color: $color-mainblack;
+  position: relative;
+  overflow: hidden;
+}
+
+
+// 動態光暈
+.six-houses-cover__spotlight {
+  // 容器本身只負責定位和套用最終效果
+  position: absolute;
+  top: 200px;
+  right: 200px;
+  width: 500px;
+  height: 500px;
+
+  // 模糊和混合模式會套用在它內部的所有偽元素上
+  filter: blur(80px);
+  mix-blend-mode: plus-lighter;
+  z-index: 1;
+
+  // 使用偽元素建立兩個顏色圖層
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+  }
+
+  // 藍色圖層 (底層)
+  &::before {
+    background: radial-gradient(circle, $color-blue 5%, $color-light 80%);
+    animation: fadeOutIn 12s ease-in-out infinite;
+  }
+
+  // 黃色圖層 (上層)
+  &::after {
+    background: radial-gradient(circle, $color-copperyellow 7%, $color-light 85%);
+    opacity: 0; // 預設透明
+    animation: fadeInOut 12s ease-in-out infinite;
+  }
+}
+
+// 文字內容
+.six-houses-cover__content {
+  position: absolute;
+  top: 240px;
+  left: 140px;
+  z-index: 10;
+  color: #f0f0f0;
+}
+
+.six-houses-cover__title {
+  font-size: map-get($font-size, xxxl);
+  line-height: $line-h-m;
+  font-weight: $bold;
+  letter-spacing: $letter-s;
+  color: $color-copper ;
+  margin: 0 0 28px 0;
+
+}
+
+.six-houses-cover__subtitle {
+  font-size: map-get($font-size, l);
+  line-height: $line-h-m;
+  font-weight: $bold;
+  letter-spacing: $letter-s;
+  color: $color-light ;
+  margin: 12px 0;
+}
+
+// 建築圖片淡入淡出效果
+.six-houses-cover__building-container {
+  position: absolute;
+  bottom: -1000px;
+  left: 55%;
+  transform: translateX(-50%);
+  height: 1578px;
+  // 【注意】請根據您圖片的實際寬高比調整這個寬度
+  width: 887px;
+  z-index: 5;
+}
+
+.six-houses-cover__building-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; // 確保圖片等比縮放
+}
+
+// 為兩張圖片套用反向的透明度動畫
+.six-houses-cover__building-img--1 {
+  animation: fadeOutIn 12s ease-in-out infinite;
+  // 延遲 -6 秒，讓圖片動畫和光暈動畫錯開，更有層次感
+  animation-delay: -6s;
+}
+
+.six-houses-cover__building-img--2 {
+  opacity: 0; // 預設透明
+  animation: fadeInOut 12s ease-in-out infinite;
+  animation-delay: -6s;
+}

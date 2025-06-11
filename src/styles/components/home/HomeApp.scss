@@ -1,0 +1,67 @@
+@use "../../variable/" as *;
+
+.homeApp {
+  width: 1440px;
+  height: 800px;
+  margin: 0 auto;
+  position: relative;
+  background-color:$color-grey;
+  border-radius: $radius-l;
+  text-align: center;
+  overflow: hidden;
+
+  &__title {
+    padding-top: 24px;
+    z-index: 3;
+    position: relative;
+
+    h2 {
+      font-size: map-get($font-size, xxxl);
+      line-height: $line-h-m;
+      font-weight: $bolder;
+      letter-spacing: $letter-s;
+      color: $color-copper ;
+    }
+  }
+
+  .homeapp__button-container {
+    margin: 16px 0;
+    z-index: 3;
+    position: relative;
+  }
+
+  &__carousel-wrapper {
+    position: relative;
+    width: 1315px;
+    height: 600px;
+    top: 39.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+
+  .carousel-img {
+    position: absolute;
+    width: 223px;
+    height: auto;
+    object-fit: cover;
+    transition: all 0.6s ease-in-out;
+    z-index: 1;
+  }
+
+  &__frame {
+    position: absolute;
+    width: 250px;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    pointer-events: none;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
