@@ -7,21 +7,50 @@
   height: 100vh; // 或 parent 高度
 }
 
+/* 六數字 */
+
+.homepage2 {
+  position: relative; // ① 建立定位參考
+}
+
 .sixtwordtitle {
   font-size: map-get($font-size, xxl);
   font-weight: $bolder;
   letter-spacing: $letter-s;
   color: $color-light;
   text-align: center;
-  margin: 60px 0 20px;
+  margin: 240px 0 240px;
+  position: relative; // ④ 讓標題在球形之上
+  z-index: 2;
 }
 
-.sixline {
-  width: 800px;
-  height: 2px;
-  background-color: $color-light;
-  margin: 20px auto 40px auto; // 距離標題與下方 grid 的間距
+.ball {
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  border: 1px solid  #F9FAFF;
+
 }
+
+.shadow {
+  position: absolute; // ② 絕對定位
+  top: 2rem;
+  left: 50%;
+  transform: translate(-50%, -50%); // 垂直往上 50%、水平回退 50%
+  z-index: 1; // ③ 放在標題下方
+  box-shadow:
+    0 0 0.5rem 0#F9FAFF,
+    inset 0 0 0.5rem 0 #fff,
+    -0.3rem 0 1rem 0.3rem #2B75FF,
+    0.3rem 0 1rem 0.3rem #7fffd4,
+    inset 0.7rem 0 2rem 0.2rem #7fffd4,
+    inset -0.7rem 0 2rem 0.2rem #2B75FF;
+}
+
+
+
+
+
 
 .homepage3 {
   display: flex;
@@ -33,4 +62,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+}
+
+.homepage6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 48px 0;
 }

@@ -1,68 +1,133 @@
-@use "../../variable/" as *;
+@use "../../variable/" as *; // 假設您的變數 (如 $color-mainblack) 在此處定義
 
+/* --- 1. 最外層容器與光暈邊框 --- */
 .full-screen-grid-container {
   width: 1392px;
-  height: 1200px;
-  background-color: $color-mainblack; 
-  padding: 20px; // 與 .grid-layout 的 top/left/right/bottom 配合
+  height: 1500px;
   box-sizing: border-box;
   margin: 20px auto;
   position: relative;
   overflow: hidden;
+  border-radius: 696px 696px 0 0;
+
+  // 將背景色改為漸層背景以形成邊框光暈
+  background: radial-gradient(circle 1200px at 50% -25%, $color-accent, $color-mainblack);
+
+  // 為了讓四邊都有邊框效果，padding 需要統一設定
+  padding: 4px;
+
+  // 右上角光暈
+  &::after {
+    content: "";
+    position: absolute;
+    width: 45%;
+    height: 35%;
+    border-radius: 999px;
+    top: -2%;
+    right: -5%;
+    box-shadow: 0 0 80px 20px rgba($color-copperyellow, 0.15);
+    z-index: 0; // 在內容之下
+    pointer-events: none;
+  }
+
+  // 左下角光暈
+  &::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    bottom: -80px;
+    left: 20px;
+    background: radial-gradient(circle 200px at 0% 100%,
+        rgba(#3fe9ff, 0.4),
+        rgba(#0000ff, 0.2),
+        transparent 70%);
+    box-shadow: -10px 10px 50px rgba(#0051ff, 0.1);
+    z-index: 0; // 在內容之下
+    pointer-events: none;
+  }
 }
+
+/* --- 2. 內容包裹層 --- */
+.content-wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: $color-mainblack; // 使用您原本的深色背景
+  border-radius: 692px 692px 0 0; // (696px - 4px)
+  position: relative;
+  overflow: hidden;
+  z-index: 1; // 確保內容在光暈之上
+}
+
+
+/* --- 3. 佈局與互動樣式 --- */
 
 .mouse-spotlight-visual-glow {
   position: absolute;
-  width: 350px;
-  height: 350px;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(46, 88, 46, 0.08) 0%, rgba(57, 86, 215, 0) 70%);
   transform: translate(-50%, -50%);
   pointer-events: none;
-  z-index: 1; // 光暈在最底層（但在主背景之上）
+  z-index: 1;
 }
 
-// .grid-layout 的通用樣式，用於文字層和邊框層的對齊
 .grid-layout {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(6, 1fr);
   gap: 15px;
   position: absolute;
-  // ⭐ 確保網格與容器的 padding 對齊 (如果容器有 padding)
-  // 如果 full-screen-grid-container 的 padding 是 20px:
-  top: 20px;
+  top: 220px;
   left: 20px;
-  right: 20px; // 或 width: calc(100% - 40px);
-  bottom: 20px; // 或 height: calc(100% - 40px);
-  // 如果 full-screen-grid-container 沒有 padding，則 top:0; left:0; width:100%; height:100%;
+  right: 20px;
+  bottom: 20px;
 }
 
 .text-grid {
-  z-index: 3; // ⭐ 文字層在最上方，始終可見
-  pointer-events: none; // ⭐ 讓文字層不攔截滑鼠事件，事件由最底層容器捕獲
-     // 個別文字框內的 pointer-events 已在 HoverInfoBox.scss 中設定
+  z-index: 3;
+  pointer-events: none;
 }
 
 .border-grid {
-  z-index: 2; // ⭐ 邊框層在文字層之下，光暈視覺效果之上
-
-  // CSS 遮罩核心樣式 (與上次相同)
+  z-index: 2;
   --mask-x: -1000px;
   --mask-y: -1000px;
   --mask-radius: 0px;
 
-  mask-image: radial-gradient(
-    circle var(--mask-radius) at var(--mask-x) var(--mask-y),
-    rgba(255, 255, 255, 1) 0%,    // ⭐ 中心點完全不透明 (顯示內容)
-    rgba(255, 255, 255, 1) 40%,   // ⭐ 到達半徑的40%處仍然完全不透明
-    rgba(255, 255, 255, 0) 100%  // ⭐ 從40%到100%之間逐漸變為完全透明 (隱藏內容)
-  );
+  mask-image: radial-gradient(circle var(--mask-radius) at var(--mask-x) var(--mask-y),
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 40%,
+      rgba(255, 255, 255, 0) 100%);
   mask-repeat: no-repeat;
-  -webkit-mask-image: radial-gradient( /* ... (同上) ... */ );
+  -webkit-mask-image: radial-gradient(circle var(--mask-radius) at var(--mask-x) var(--mask-y),
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 40%,
+      rgba(255, 255, 255, 0) 100%);
   -webkit-mask-repeat: no-repeat;
 
-  .empty-grid-cell { // 用於填充非目標框的網格單元，確保佈局一致
-     background: transparent; // 或者移除此class，直接返回null，讓grid自行處理空單元
+  .empty-grid-cell {
+    background: transparent;
   }
 }
+
+.static-light-beam {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 1000px;
+  
+  // ⭐【修改】光束的顏色與漸變，您可以微調此處的透明度
+  background: linear-gradient(180deg, rgba(127, 255, 212, 0.6) 0%,rgba(255, 255, 255, 0) 50%, transparent);
+
+  // ⭐【關鍵】保留 clip-path 來創造銳利的梯形邊緣
+  clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+  
+
+  
+  pointer-events: none;
+  }

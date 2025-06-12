@@ -35,8 +35,8 @@ function HomePage() {
             <Dispersion />
           </div>
           <div className="homepage2">
+            <div className="ball shadow"></div>
             <h2 className="sixtwordtitle">六大數字</h2>
-            <div className="sixline" />
             <FullScreenGrid />
           </div>
           <div className="homepage3">
@@ -45,11 +45,12 @@ function HomePage() {
           <div className="homepage4">
             <HomeText />
           </div>
-          <div className="homepage5">
-            <ContactForm />
-          </div>
+
           <div className="homepage6">
             <HomeApp />
+          </div>
+          <div className="homepage5">
+            <ContactForm />
           </div>
           <Footer />
         </>
