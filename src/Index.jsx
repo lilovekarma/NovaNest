@@ -1,63 +1,29 @@
-import React, { useState, useEffect } from 'react';
-/* 開場 */
-import OpeningAnimation from './styles/components/openinganimation/OpeningAnimation';
-import Navbar from './styles/components/navbar/Navbar';
-/* 首圖 */
-import Dispersion from './styles/components/home/Dispersion';
-/* 六大數字 */
-import FullScreenGrid from './styles/components/home/FullScreenGrid';
-/* 六總房型 */
-import HomeSixHouse from './styles/components/home/HomeSixHouse';
-/* 六總房型 */
-import HomeText from './styles/components/home/HomeText';
-/* 測驗 */
-import ContactForm from './styles/components/home/ContactForm/ContactForm';
-/* app */
-import HomeApp from './styles/components/home/HomeApp';
-import Footer from './styles/components/home/footer/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from "./HomePage";
+import SixHouse from "./SixHouse";
+import HouseTypeTest from "./HouseTypeTest";
+import AppExhibit from "./AppExhibit";
 
 
-import "../src/Index.scss";
+
 
 function Index() {
-  const [animationEnded, setAnimationEnded] = useState(false);
-
-  useEffect(() => {
-  }, []);
-
   return (
-    <>
-      {!animationEnded && (
-        <OpeningAnimation onAnimationEnd={() => setAnimationEnded(true)} />
-      )}
+    // 【新增這裡】告訴 Router，你網站的基礎路徑是 "/NovaNest"
+    <Router basename="/NovaNest">
+      <Routes>
+        {/* 現在這個 path="/" 會對應到 "/NovaNest/" 這個網址 */}
+        <Route path="/" element={<HomePage />} />
+         {/* 2.【在這裡新增】規則二：戶型 */}
+        <Route path="/SixHouse" element={ <SixHouse/>} />
+         {/* 3.【在這裡新增】規則三：測驗 */}
+         <Route path="/HouseTypeTest" element={ <HouseTypeTest/>} />
+         {/* 3.【在這裡新增】規則四：測驗 */}
+         <Route path="/AppExhibit" element={ <AppExhibit/>} />
 
-      {animationEnded && (
-        <>
-          <Navbar />
-          <div className="homepage1">
-            <Dispersion />
-          </div>
-          <div className="homepage2">
-            <h2 className="sixtwordtitle">六大數字</h2>
-            <div className="sixline" />
-            <FullScreenGrid />
-          </div>
-          <div className="homepage3">
-            <HomeSixHouse />
-          </div>
-          <div className="homepage4">
-            <HomeText />
-          </div>
-          <div className="homepage5">
-            <ContactForm />
-          </div>
-          <div className="homepage6">
-            <HomeApp />
-          </div>
-          <Footer />
-        </>
-      )}
-    </>
+       
+      </Routes>
+    </Router>
   );
 }
 

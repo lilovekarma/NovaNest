@@ -1,6 +1,6 @@
 @use 'sass:math';
 
-@import "../variable/";
+@use "../variable/index" as *;
 
 @mixin elevator-button($bg-color: $color-light,
   $bg-hover-color: $color-light,
@@ -95,5 +95,5 @@
 }
 
 .btn-homebtn {
-  @include elevator-button($color-copper, $color-copperdark, $font-size: 1.8rem, $padding-horizontal: $space-s, $border-radius: $radius-s, );
+  @include elevator-button($color-copper, $color-copperdark, $font-size: 1.5rem, $padding-horizontal: $space-s, $border-radius: $radius-m, );
 }

@@ -23,8 +23,8 @@ import resultC2 from '../../../images/sixhouse/Six-apartment-types06.jpg';
 // 建立戶型資料庫
 const houseTypes = [
   {
-    id: 'A1',
-    name: 'A1 微光系列',
+    id: 'series-01',
+    name: '01 微光系列',
     sqft: '15 坪',
     image: resultA1,
     title: '一人世界，或兩人共享的自在小宅',
@@ -32,8 +32,8 @@ const houseTypes = [
     tags: ['一人', '兩人', '約 15 坪以下', '臥室寧靜舒適', '安靜不打擾、空間夠就好']
   },
   {
-    id: 'A2',
-    name: 'A2 起居系列',
+    id: 'series-02',
+    name: '02 起居系列',
     sqft: '20 坪',
     image: resultA2,
     title: '剛起步的小家庭或好友共居',
@@ -41,8 +41,8 @@ const houseTypes = [
     tags: ['兩人', '三～四人（小家庭）', '16–22 坪', '客廳活動自在', '書房／工作空間']
   },
   {
-    id: 'B1',
-    name: 'B1 暖巢系列',
+    id: 'series-03',
+    name: '03 暖巢系列',
     sqft: '28 坪',
     image: resultB1,
     title: '三～四人小家庭',
@@ -50,8 +50,8 @@ const houseTypes = [
     tags: ['三～四人（小家庭）', '23–28 坪', '客廳活動自在', '不太會用，但希望簡單上手', '喜歡有客廳招待朋友／家庭互動']
   },
   {
-    id: 'B2',
-    name: 'B2 安恬系列',
+    id: 'series-04',
+    name: '04 安恬系列',
     sqft: '32 坪',
     image: resultB2,
     title: '四人以上家庭，含長輩或孩童',
@@ -59,8 +59,8 @@ const houseTypes = [
     tags: ['四人以上（含長輩）', '30 坪以上', '需要長輩居家安全警示', '有長輩或孩子，需要共用與獨立空間平衡']
   },
   {
-    id: 'C1',
-    name: 'C1 恆逸系列',
+    id: 'series-05',
+    name: '05 恆逸系列',
     sqft: '38 坪',
     image: resultC1,
     title: '三代同堂、多子女家庭',
@@ -68,8 +68,8 @@ const houseTypes = [
     tags: ['四人以上（含長輩）', '30 坪以上', '想有自動偵測與安全監控', '需要長輩居家安全警示', '有長輩或孩子，需要共用與獨立空間平衡']
   },
   {
-    id: 'C2',
-    name: 'C2 睿境系列',
+    id: 'series-06',
+    name: '06 睿境系列',
     sqft: '45 坪以上',
     image: resultC2,
     title: '六人以上、重視隱私與尊榮的大家庭',

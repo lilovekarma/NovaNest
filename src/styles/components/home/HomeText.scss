@@ -121,4 +121,38 @@
       }
     }
   }
+  .btn-homebtn {
+  // 添加寬度過渡效果
+  transition: all 0.3s ease;
+  width: auto;
+  min-width: fit-content;
+
+  // 為按鈕添加箭頭效果
+  .text::after {
+    content: "→";
+    display: inline-block;
+    margin-left: 8px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    width: 0;
+    overflow: hidden;
+  }
+
+  // hover 時按鈕變寬，箭頭出現並向右移動
+  &:hover {
+    padding-right: calc(var(--original-padding, 1rem) + 30px); // 增加右側內距為箭頭騰出空間
+    
+    .text::after {
+      opacity: 1;
+      transform: translateX(0);
+      width: auto;
+    }
+  }
+
+  // 也需要更新 text-wrapper 的寬度計算
+  &:hover .text-wrapper {
+    width: 100%;
+  }
+}
 }

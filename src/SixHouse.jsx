@@ -1,11 +1,11 @@
+import React, { useEffect } from 'react'; // 1. 【修改】引入 useEffect hook
+import { useLocation } from 'react-router-dom'; // 2. 【修改】引入 useLocation hook
 import "./SixHouse.scss";
 import Navbar from './styles/components/navbar/Navbar';
 import SixHousesCover from './styles/components/SixHouse/SixHousesCover';
-
 import SixHouse1 from './styles/components/SixHouse/SixHouse1';
 import SixHouse2 from './styles/components/SixHouse/SixHouse2';
 import Footer from './styles/components/home/footer/Footer';
-
 
 /* 圖片 */
 import SixHouseImg1 from '../src/images/sixhouse/Six-apartment-types01.jpg';
@@ -14,7 +14,28 @@ import SixHouseImg3 from '../src/images/sixhouse/Six-apartment-types03.jpg';
 import SixHouseImg4 from '../src/images/sixhouse/Six-apartment-types04.jpg';
 import SixHouseImg5 from '../src/images/sixhouse/Six-apartment-types05.jpg';
 import SixHouseImg6 from '../src/images/sixhouse/Six-apartment-types06.jpg';
+
 function SixHouse() {
+  // 3. 【修改】使用 useLocation hook 來取得當前的網址資訊
+  const location = useLocation();
+
+  // 4. 【修改】新增 effect，當網址改變時，檢查是否有 hash 並滾動到對應位置
+  useEffect(() => {
+    if (location.hash) {
+      // 移除 '#' 符號，取得真正的 id，例如 "series-01"
+      const id = location.hash.substring(1);
+      
+      // 使用 setTimeout 確保頁面元素都渲染完畢
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          // 如果找到元素，就平滑地滾動到該位置的頂部
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100); // 延遲 100 毫秒，確保 DOM 更新
+    }
+  }, [location]); // 這個 effect 會在 location 物件 (網址) 改變時重新執行
+
   return (
     <>
       <Navbar/>
@@ -23,7 +44,8 @@ function SixHouse() {
         <SixHousesCover />
       </div>
 
-      <div className="sixhousepage2">
+      {/* 5. 【修改】為每一個房型區塊的最外層 div 加上唯一的 id */}
+      <div id="series-01" className="sixhousepage2">
         <SixHouse1 imageUrl={SixHouseImg1}
           title="微光系列"
           subtitle="15坪｜1房1廳1衛1廚"
@@ -35,7 +57,7 @@ function SixHouse() {
           seriesNum="01" />
       </div>
 
-      <div className="sixhousepage3">
+      <div id="series-02" className="sixhousepage3">
         <SixHouse2 imageUrl={SixHouseImg2}
           title="起居系列"
           subtitle="20坪｜2房1廳1衛1廚"
@@ -47,7 +69,7 @@ function SixHouse() {
           seriesNum="02" />
       </div>
 
-      <div className="sixhousepage2">
+      <div id="series-03" className="sixhousepage2">
         <SixHouse1 imageUrl={SixHouseImg3}
           title="暖巢系列"
           subtitle="28坪｜3房2廳1.5衛1廚"
@@ -59,7 +81,7 @@ function SixHouse() {
           seriesNum="03" />
       </div>
 
-      <div className="sixhousepage3">
+      <div id="series-04" className="sixhousepage3">
         <SixHouse2 imageUrl={SixHouseImg4}
           title="安恬系列"
           subtitle="32坪｜3房2廳2衛1廚"
@@ -71,7 +93,7 @@ function SixHouse() {
           seriesNum="04" />
       </div>
 
-      <div className="sixhousepage2">
+      <div id="series-05" className="sixhousepage2">
         <SixHouse1 imageUrl={SixHouseImg5}
           title="恆逸系列"
           subtitle="38坪｜4房2廳2衛1廚"
@@ -83,7 +105,7 @@ function SixHouse() {
           seriesNum="05" />
       </div>
 
-      <div className="sixhousepage3">
+      <div id="series-06" className="sixhousepage3">
         <SixHouse2 imageUrl={SixHouseImg6}
           title="睿境系列"
           subtitle="45坪以上｜5房2廳3衛1廚"

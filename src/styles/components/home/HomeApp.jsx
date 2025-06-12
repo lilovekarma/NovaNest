@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom'; // 1. 【修改】引入 useNavigate hook
 import "./HomeApp.scss";
 import app1 from "../../../images/home/app-3.png";
 import app2 from "../../../images/home/app-5.png";
@@ -9,6 +10,7 @@ import iphone14 from "../../../images/home/iphone14.svg";
 import AnimatedButton from "../../components/btn/AnimatedButton";
 
 const HomeApp = () => {
+  const navigate = useNavigate(); // 2. 【修改】初始化 navigate 函式
   const images = [app1, app2, app3, app4, app5];
 
   const positions = [
@@ -40,9 +42,12 @@ const HomeApp = () => {
       </div>
 
       <div className="homeapp__button-container">
-        <AnimatedButton className="btn-homeapp">
+        <AnimatedButton 
+          className="btn-homeapp"
+          // 3. 【修改】將 onClick 事件導向到 '/AppExhibit' 這個路徑
+          onClick={() => navigate('/AppExhibit')}
+        >
           詳看詳情
-
         </AnimatedButton>
       </div>
 
